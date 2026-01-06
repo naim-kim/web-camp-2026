@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-public class DbTest {
+public class JdbcApplication {
     public static void main(String[] args) {
         Properties props = new Properties();
 
