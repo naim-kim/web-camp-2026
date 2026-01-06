@@ -42,6 +42,8 @@ logs/
 application.properties
 application.yml
 application-*.yml
+*.properties
+*.yml
 
 ############################
 # Docker
