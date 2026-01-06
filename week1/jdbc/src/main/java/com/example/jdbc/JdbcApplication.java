@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class JdbcApplication {
     public static void main(String[] args) {
+
         Properties props = new Properties();
 
         try (FileInputStream fis = new FileInputStream("config/db.properties")) {
@@ -17,10 +18,10 @@ public class JdbcApplication {
             String password = props.getProperty("DB_PASSWORD");
 
             try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                System.out.println("✅ DB 접속 성공!");
+                System.out.println("DB Connection Test Successful!");
             }
         } catch (Exception e) {
-            System.out.println("❌ DB 접속 실패!");
+            System.out.println("DB Connection Test Failed!!");
             e.printStackTrace();
         }
     }
