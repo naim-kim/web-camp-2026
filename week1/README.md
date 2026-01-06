@@ -17,3 +17,16 @@ B1. Java 설치
 
 B2. IntelliJ 설치 및 프로젝트 생성
 <img src="images/b2.png"/><br>
+
+---
+
+### **C. MariaDB를 Docker로 설치**
+
+C1. Docker 설치 및 확인
+<img src="images/c1.png"/><br>
+
+C2. MariaDB 컨테이너 실행 (단일 docker run)
+<img src="images/c2.png"/><br>
+
+C3. DB 접속 확인
+<img src="images/c3.png"/><br>
