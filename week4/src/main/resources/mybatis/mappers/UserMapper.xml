@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.mapper.UserMapper">
+    
+    <!-- Result Map -->
+    <resultMap id="userResultMap" type="User">
+        <id property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="role" column="role"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+    
+    <!-- Find By Username -->
+    <select id="findByUsername" parameterType="string" resultMap="userResultMap">
+        SELECT username, password, role, created_at
+        FROM users
+        WHERE username = #{username}
+    </select>
+    
+    <!-- Insert User -->
+    <insert id="insert" parameterType="User">
+        INSERT INTO users (username, password, role)
+        VALUES (#{username}, #{password}, #{role})
+    </insert>
+    
+    <!-- Count By Username (중복 체크용) -->
+    <select id="countByUsername" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM users WHERE username = #{username}
+    </select>
+    
+</mapper>
