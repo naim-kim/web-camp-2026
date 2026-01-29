@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.mapper.ItemMapper">
+    
+    <!-- Result Map -->
+    <resultMap id="itemResultMap" type="Item">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    
+    <!-- Find All -->
+    <select id="findAll" resultMap="itemResultMap">
+        SELECT id, title, content, created_at, updated_at
+        FROM item
+        ORDER BY created_at DESC
+    </select>
+    
+    <!-- Find By ID -->
+    <select id="findById" parameterType="int" resultMap="itemResultMap">
+        SELECT id, title, content, created_at, updated_at
+        FROM item
+        WHERE id = #{id}
+    </select>
+    
+    <!-- Insert -->
+    <insert id="insert" parameterType="Item" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO item (title, content)
+        VALUES (#{title}, #{content})
+    </insert>
+    
+    <!-- Update -->
+    <update id="update" parameterType="Item">
+        UPDATE item
+        SET title = #{title},
+            content = #{content}
+        WHERE id = #{id}
+    </update>
+    
+    <!-- Delete -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM item
+        WHERE id = #{id}
+    </delete>
+    
+</mapper>
