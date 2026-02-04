@@ -1,0 +1,4 @@
+db.driverClassName=org.mariadb.jdbc.Driver
+db.jdbcUrl=jdbc:mariadb://localhost:3306/spring_crud
+db.username=root
+db.password=YOUR_PASSWORD_HERE
