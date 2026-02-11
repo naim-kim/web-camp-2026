@@ -1,0 +1,38 @@
+plugins {
+	id 'java'
+	id 'application'
+}
+
+group = 'com.example'
+version = '1.0'
+description = 'jdbc'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+application {
+	mainClass = 'com.example.jdbc.JdbcApplication'
+	// 콘솔 한글 깨짐 방지
+	applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
+// gradle run 시 표준 입력을 연결해 콘솔 메뉴 입력을 받을 수 있게 함
+tasks.named('run') {
+	standardInput = System.in
+}
+
+tasks.test {
+	useJUnitPlatform()
+}

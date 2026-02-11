@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- Enable camelCase mapping -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- Enable lazy loading -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- Log implementation -->
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+    
+    <typeAliases>
+        <package name="com.example.project.domain"/>
+    </typeAliases>
+</configuration>
