@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://mybatis.org/schema/mybatis-spring 
+           http://mybatis.org/schema/mybatis-spring.xsd">
+    
+    <!-- Component Scan (exclude controllers) -->
+    <context:component-scan base-package="com.example.project">
+        <context:exclude-filter type="annotation" 
+            expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- Property Placeholder -->
+    <context:property-placeholder location="classpath:database.properties" 
+        ignore-resource-not-found="true"/>
+    
+    <!-- DataSource (HikariCP) -->
+    <!-- DB settings come from src/main/resources/database.properties (ignored in git). -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="jdbcUrl" value="${db.jdbcUrl}"/>
+        <!-- DB 이름: spring_board (week3 프로젝트용) -->
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="maximumPoolSize" value="10"/>
+        <property name="minimumIdle" value="5"/>
+    </bean>
+    
+    <!-- SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mybatis/mappers/**/*.xml"/>
+    </bean>
+    
+    <!-- MyBatis Mapper Scan -->
+    <mybatis:scan base-package="com.example.project.mapper"/>
+    
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" 
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- Enable Transaction Annotation -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+</beans>

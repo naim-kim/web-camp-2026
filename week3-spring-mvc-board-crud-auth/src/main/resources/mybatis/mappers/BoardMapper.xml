@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.mapper.BoardMapper">
+    
+    <!-- Result Map -->
+    <resultMap id="boardResultMap" type="Board">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="writer" column="writer"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+    
+    <!-- Find All -->
+    <select id="findAll" resultMap="boardResultMap">
+        SELECT id, title, content, writer, created_at, updated_at
+        FROM board
+        ORDER BY created_at DESC
+    </select>
+    
+    <!-- Find By ID -->
+    <select id="findById" parameterType="int" resultMap="boardResultMap">
+        SELECT id, title, content, writer, created_at, updated_at
+        FROM board
+        WHERE id = #{id}
+    </select>
+    
+    <!-- Insert -->
+    <insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO board (title, content, writer)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+    
+    <!-- Update -->
+    <update id="update" parameterType="Board">
+        UPDATE board
+        SET title = #{title},
+            content = #{content}
+        WHERE id = #{id}
+    </update>
+    
+    <!-- Delete -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM board
+        WHERE id = #{id}
+    </delete>
+    
+</mapper>
