@@ -1,9 +1,9 @@
-import SummaryBuilder from "./SummaryBuilder";
+import PortfolioBuilder from "./PortfolioBuilder";
 
 function App() {
   return (
     <div>
-      <SummaryBuilder />
+      <PortfolioBuilder />
     </div>
   );
 }
