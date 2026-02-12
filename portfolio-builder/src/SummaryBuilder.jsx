@@ -14,7 +14,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-export default function SummaryBuilder() {
+export default function PortfolioBuilder() {
   const [isEditMode, setIsEditMode] = useState(true);
 
   // 1. 기본 정보
